@@ -105,20 +105,24 @@ public class IntList {
         IntList Bptr = B;
         IntList res = new IntList(A.first, null);
         IntList ptr = res;
-        while (Aptr.rest != null) {
-            Aptr = Aptr.rest;
-            ptr.rest = new IntList(Aptr.first, null);
-            ptr = ptr.rest;
-        }
+        ptr = IntList.addBehind(Aptr, ptr);
+
         if (B == null) {
             return res;
         }
-        while (Bptr != null) {
-            ptr.rest = new IntList(Bptr.first, null);
-            Bptr = Bptr.rest;
-            ptr = ptr.rest;
-        }
+        ptr.rest = new IntList(B.first, null);
+        ptr = ptr.rest;
+        ptr = addBehind(Bptr, ptr);
         return res;
+    }
+
+    private static IntList addBehind(IntList Xptr, IntList resPtr){
+        while (Xptr.rest != null) {
+            Xptr = Xptr.rest;
+            resPtr.rest = new IntList(Xptr.first, null);
+            resPtr = resPtr.rest;
+        }
+        return resPtr;
     }
 
     public static IntList reverse(IntList A){
