@@ -101,53 +101,42 @@ public class IntList {
         if (A == null) {
             return null;
         }
-        IntList Aptr = A;
-        IntList Bptr = B;
+        IntList aPtr = A;
+        IntList bPtr = B;
         IntList res = new IntList(A.first, null);
         IntList ptr = res;
-        ptr = IntList.addBehind(Aptr, ptr);
+        ptr = IntList.addBehind(aPtr, ptr);
 
         if (B == null) {
             return res;
         }
         ptr.rest = new IntList(B.first, null);
         ptr = ptr.rest;
-        ptr = addBehind(Bptr, ptr);
+        ptr = addBehind(bPtr, ptr);
         return res;
     }
 
-    private static IntList addBehind(IntList Xptr, IntList resPtr){
-        while (Xptr.rest != null) {
-            Xptr = Xptr.rest;
-            resPtr.rest = new IntList(Xptr.first, null);
+    private static IntList addBehind(IntList xPtr, IntList resPtr) {
+        while (xPtr.rest != null) {
+            xPtr = xPtr.rest;
+            resPtr.rest = new IntList(xPtr.first, null);
             resPtr = resPtr.rest;
         }
         return resPtr;
     }
 
-    public static IntList reverse(IntList A){
-        if (A == null){
+    public static IntList reverse(IntList A) {
+        if (A == null) {
             return null;
         }
         IntList ptr = A;
         IntList res = new IntList(A.first, null);
-        while (ptr.rest != null){
+        while (ptr.rest != null) {
             ptr = ptr.rest;
             res = new IntList(ptr.first, res);
         }
         return res;
-
-
-}
-
-
-
-
-
-
-
-
-
+    }
 
 
 
