@@ -34,7 +34,7 @@ public class testHexWorld {
                 world[i][j] = Tileset.NOTHING;
             }
         }
-        HexWorld.addTrapezoid(5, 20, 6, 3, 1, world);
+        HexWorld.addTrapezoid(5, 20, 6, 3, 1, world, Tileset.WALL);
         ter.renderFrame(world);
     }
 
@@ -43,7 +43,7 @@ public class testHexWorld {
         TERenderer ter = testHexWorld.initializeBackground();
         TETile[][] world = initializeWorld();
         int x1 = 5, y1 = 20, size = 8;
-        HexWorld.addHexagon(x1, y1, size, world);
+        HexWorld.addHexagon(x1, y1, size, world, Tileset.FLOWER);
         int x2, y2, x3, y3;
         int[] xy = HexWorld.moveToRight(x1, y1, size);
         x2 = xy[0];
@@ -51,8 +51,8 @@ public class testHexWorld {
         int [] x3y3 = HexWorld.upALine(x1, y1, size);
         x3 = x3y3[0];
         y3 = x3y3[1];
-        HexWorld.addHexagon(x2, y2, size, world);
-        HexWorld.addHexagon(x3, y3, size, world);
+        HexWorld.addHexagon(x2, y2, size, world, Tileset.WALL);
+        HexWorld.addHexagon(x3, y3, size, world, Tileset.MOUNTAIN);
         ter.renderFrame(world);
     }
 
