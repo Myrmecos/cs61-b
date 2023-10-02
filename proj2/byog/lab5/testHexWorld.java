@@ -38,8 +38,8 @@ public class testHexWorld {
         ter.renderFrame(world);
     }
 
-
-    public static void main(String[] args){
+    @Test
+    public void moveHexTest(){
         TERenderer ter = testHexWorld.initializeBackground();
         TETile[][] world = initializeWorld();
         int x1 = 5, y1 = 20, size = 8;
@@ -55,6 +55,16 @@ public class testHexWorld {
         HexWorld.addHexagon(x3, y3, size, world, Tileset.MOUNTAIN);
         ter.renderFrame(world);
     }
+
+    public static void main(String[] args){
+        TERenderer ter = testHexWorld.initializeBackground();
+        TETile[][] world = initializeWorld();
+        int x1 = 5, y1 = 20, size = 8;
+        TETile tile = Tileset.WALL;
+        HexWorld.drawLargeL(x1, y1, 3, size, world, tile);
+        ter.renderFrame(world);
+    }
+
 
     @Test
     public void example() {

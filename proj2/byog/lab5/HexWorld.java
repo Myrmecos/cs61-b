@@ -64,4 +64,23 @@ public class HexWorld {
         int[] xy = {xStart + sizeOfUnit / 2 + topWidth - 1, yStart + sizeOfUnit / 2};
         return xy;
     }
+
+    public static void drawLargeHex(int startX, int startY, int bottomWidth, int unitWidth, int step, TETile[][] world, TETile tile){
+        int layers = bottomWidth;
+        for (int i = 0; i < bottomWidth; i++){
+            drawLargeL(startX, startY, bottomWidth, unitWidth, world, tile);
+        }
+
+    }
+
+    public static void drawLargeL(int startX, int startY, int bottomWidth, int unitWidth, TETile[][] world, TETile tile){
+        int xPtr = startX;
+        int yPtr = startY;
+        for (int i = 0; i < bottomWidth; i++){
+            addHexagon(xPtr, yPtr, unitWidth, world, tile);
+            int[] xyNext = upALine(xPtr, yPtr, unitWidth);
+            xPtr = xyNext[0];
+            yPtr = xyNext[1];
+        }
+    }
 }
