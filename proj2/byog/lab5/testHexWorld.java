@@ -70,7 +70,7 @@ public class testHexWorld {
         TERenderer ter = testHexWorld.initializeBackground();
         TETile[][] world = initializeWorld();
         int x1 = 5, y1 = 60, size = 8, bottomWidth = 3;
-        TETile tile = Tileset.WALL;
+        TETile tile = Tileset.FLOWER;
         HexWorld.drawLargeHex(x1, y1, bottomWidth, size, world, tile);
         ter.renderFrame(world);
     }
@@ -99,3 +99,4 @@ public class testHexWorld {
         ter.renderFrame(world);
     }
 }
+// a random line out of nowhere

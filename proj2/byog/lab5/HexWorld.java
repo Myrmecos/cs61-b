@@ -80,6 +80,7 @@ public class HexWorld {
     }
 
     public static void drawLargeHex(int startX, int startY, int sideLen, int unitWidth, TETile[][] world, TETile tile){
+
         int layers = sideLen;
         int yStep = 2*(1 + (unitWidth - calcTopWidth(unitWidth))/2);
         for (int i = 0; i < sideLen; i++){
@@ -101,6 +102,7 @@ public class HexWorld {
         int xPtr = startX;
         int yPtr = startY;
         for (int i = 0; i < sideLen; i++){
+            tile = RandomWorldDemo.randomTile1();
             addHexagon(xPtr, yPtr, unitWidth, world, tile);
             int[] xyNext = upALine(xPtr, yPtr, unitWidth);
             xPtr = xyNext[0];
@@ -112,6 +114,7 @@ public class HexWorld {
         yPtr = xyNext[1];
 
         for (int i = 0; i < sideLen; i ++){
+            tile = RandomWorldDemo.randomTile1();
             addHexagon(xPtr, yPtr, unitWidth, world, tile);
             xyNext = downALine(xPtr, yPtr, unitWidth);
             xPtr = xyNext[0];
