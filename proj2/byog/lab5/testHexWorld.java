@@ -42,7 +42,17 @@ public class testHexWorld {
     public static void main(String[] args){
         TERenderer ter = testHexWorld.initializeBackground();
         TETile[][] world = initializeWorld();
-        HexWorld.addHexagon(5, 20, 10, world);
+        int x1 = 5, y1 = 20, size = 8;
+        HexWorld.addHexagon(x1, y1, size, world);
+        int x2, y2, x3, y3;
+        int[] xy = HexWorld.moveToRight(x1, y1, size);
+        x2 = xy[0];
+        y2 = xy[1];
+        int [] x3y3 = HexWorld.upALine(x1, y1, size);
+        x3 = x3y3[0];
+        y3 = x3y3[1];
+        HexWorld.addHexagon(x2, y2, size, world);
+        HexWorld.addHexagon(x3, y3, size, world);
         ter.renderFrame(world);
     }
 
