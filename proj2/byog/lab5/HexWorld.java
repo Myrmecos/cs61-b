@@ -59,26 +59,61 @@ public class HexWorld {
         return xy;
     }
 
+    /*move up a line and go to the right
+    * good for drawing hexagons (with sides slanting up)*/
     public static int[] upALine(int xStart, int yStart, int sizeOfUnit){
         int topWidth = calcTopWidth(sizeOfUnit);
         int[] xy = {xStart + sizeOfUnit / 2 + topWidth - 1, yStart + sizeOfUnit / 2};
         return xy;
     }
 
-    public static void drawLargeHex(int startX, int startY, int bottomWidth, int unitWidth, int step, TETile[][] world, TETile tile){
-        int layers = bottomWidth;
-        for (int i = 0; i < bottomWidth; i++){
-            drawLargeL(startX, startY, bottomWidth, unitWidth, world, tile);
+    public static int[] downALine(int xStart, int yStart, int sizeOfUnit){
+        int topWidth = calcTopWidth(sizeOfUnit);
+        int[] xy = {xStart + sizeOfUnit / 2 + topWidth - 1, yStart - sizeOfUnit / 2};
+        return xy;
+    }
+
+    public static int[] downALineLeft(int xStart, int yStart, int sizeOfUnit){
+        int topWidth = calcTopWidth(sizeOfUnit);
+        int[] xy = {xStart - sizeOfUnit / 2 - topWidth + 1, yStart - sizeOfUnit / 2};
+        return xy;
+    }
+
+    public static void drawLargeHex(int startX, int startY, int sideLen, int unitWidth, TETile[][] world, TETile tile){
+        int layers = sideLen;
+        int yStep = 2*(1 + (unitWidth - calcTopWidth(unitWidth))/2);
+        for (int i = 0; i < sideLen; i++){
+            drawLargeL(startX, startY, sideLen, unitWidth, world, tile);
+            startY -= yStep;
         }
+        startY += yStep;
+        for (int j = 1; j < sideLen; j++){
+            int[] xy = downALine(startX, startY, unitWidth);
+            startX = xy[0];
+            startY = xy[1];
+            drawLargeL(startX, startY, sideLen - j, unitWidth, world, tile);
+        }
+
 
     }
 
-    public static void drawLargeL(int startX, int startY, int bottomWidth, int unitWidth, TETile[][] world, TETile tile){
+    public static void drawLargeL(int startX, int startY, int sideLen, int unitWidth, TETile[][] world, TETile tile){
         int xPtr = startX;
         int yPtr = startY;
-        for (int i = 0; i < bottomWidth; i++){
+        for (int i = 0; i < sideLen; i++){
             addHexagon(xPtr, yPtr, unitWidth, world, tile);
             int[] xyNext = upALine(xPtr, yPtr, unitWidth);
+            xPtr = xyNext[0];
+            yPtr = xyNext[1];
+        }
+
+        int[] xyNext = downALineLeft(xPtr, yPtr, unitWidth);
+        xPtr = xyNext[0];
+        yPtr = xyNext[1];
+
+        for (int i = 0; i < sideLen; i ++){
+            addHexagon(xPtr, yPtr, unitWidth, world, tile);
+            xyNext = downALine(xPtr, yPtr, unitWidth);
             xPtr = xyNext[0];
             yPtr = xyNext[1];
         }

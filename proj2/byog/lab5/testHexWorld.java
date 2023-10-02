@@ -7,7 +7,7 @@ import byog.TileEngine.TETile;
 
 public class testHexWorld {
     private static final int WIDTH = 50;
-    private static final int HEIGHT = 40;
+    private static final int HEIGHT = 80;
 
     private static TERenderer initializeBackground(){
         TERenderer ter = new TERenderer(); //displayer
@@ -55,8 +55,8 @@ public class testHexWorld {
         HexWorld.addHexagon(x3, y3, size, world, Tileset.MOUNTAIN);
         ter.renderFrame(world);
     }
-
-    public static void main(String[] args){
+    @Test
+    public void testDrawLargeL(String[] args){
         TERenderer ter = testHexWorld.initializeBackground();
         TETile[][] world = initializeWorld();
         int x1 = 5, y1 = 20, size = 8;
@@ -65,6 +65,15 @@ public class testHexWorld {
         ter.renderFrame(world);
     }
 
+
+    public static void main(String[] args){
+        TERenderer ter = testHexWorld.initializeBackground();
+        TETile[][] world = initializeWorld();
+        int x1 = 5, y1 = 60, size = 8, bottomWidth = 3;
+        TETile tile = Tileset.WALL;
+        HexWorld.drawLargeHex(x1, y1, bottomWidth, size, world, tile);
+        ter.renderFrame(world);
+    }
 
     @Test
     public void example() {
