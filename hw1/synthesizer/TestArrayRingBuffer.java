@@ -19,6 +19,8 @@ public class TestArrayRingBuffer {
         }
         arb.print();
         arb.dequeue();
+        arb.enqueue(100);
+        System.out.println(arb.peek());
     }
     /** Calls tests for ArrayRingBuffer. */
     public static void main(String[] args) {
