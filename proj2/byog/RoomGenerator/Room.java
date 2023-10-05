@@ -20,9 +20,9 @@ public class Room {
 
     //generate a random room, var is the variation in size
     //width is the span of the room, wall included
-    public Room(int width, int height, int wvar, int hvar, TETile[][] world){
-        this.worldWidth = world[0].length;
-        this.worldHeight = world.length;
+    public Room(int width, int height, int wvar, int hvar, TETile[][] world, int seed){
+        this.worldHeight = world[0].length;
+        this.worldWidth = world.length;
         rdn = new Random(seed);
         double randW = rdn.nextDouble() * 2 - 1;
         double randH = rdn.nextDouble() * 2 - 1;
@@ -30,8 +30,8 @@ public class Room {
         double randY = rdn.nextDouble();
         this.width = width + (int) Math.round(randW * wvar);
         this.height = height + (int) Math.round(randH * hvar);
-        this.xPos = (int) Math.round(randX * worldWidth);
-        this.yPos = (int) Math.round(randY * worldHeight);
+        this.xPos = (int) Math.round(randX * (worldWidth - width));
+        this.yPos = (int) Math.round(randY * (worldHeight - height));
         this.seed = rdn.nextInt();
     }
 
@@ -100,6 +100,17 @@ public class Room {
 
      }
 
+     public static boolean checkOutOfBound(Room i, TETile[][] world){
+        int ylim = world[0].length;
+        int xlim = world.length;
+
+        if (i.xPos > 0 & i.xPos + i.width < xlim & i.yPos > 0 & i.yPos + i.height < ylim){
+            return false;
+        }
+        return true;
+     }
+
+
      public static void plotAllRooms(Room[] roomList, TETile[][] world){
         for (Room i : roomList){
             if (i != null) {
@@ -109,19 +120,20 @@ public class Room {
      }
 
      public static Room[] generateRandomRoom(int num, TETile[][] world){
+        Random rdn = new Random(42);
         Room[] roomList = new Room[num];
         int cnt = 0;
         for (int i = 0; i < num; i++){
-
-            Room newRoom = new Room(8, 10, 5, 5, world);
+            Room newRoom = new Room(8, 10, 5, 5, world, rdn.nextInt());
             newRoom.printRoom();
-            if (newRoom.checkAllOverlap(roomList) == false){
+            if (newRoom.checkAllOverlap(roomList) == false & checkOutOfBound(newRoom, world) == false){
                 roomList[i] = newRoom;
+
             } else {
                 cnt += 1;
                 i--;
             }
-            if (cnt >=10){
+            if (cnt >=90){
                 break;
             }
         }

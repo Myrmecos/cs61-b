@@ -19,7 +19,7 @@ public class TestRoom {
     TETile[][] world = new TETile[WIDTH][HEIGHT];
     @Test
     public void TestMakeRoom() {
-        Room firstRoom = new Room(15, 10, 5, 5, world);
+        Room firstRoom = new Room(15, 10, 5, 5, world, 1);
         firstRoom.printRoom();
     }
 
@@ -36,8 +36,8 @@ public class TestRoom {
 
     @Test
     public void checkOverlapTest(){
-        Room room1 = new Room(10, 10, 0, 0, world);
-        Room room2 = new Room(10, 10, 0, 0, world);
+        Room room1 = new Room(10, 10, 0, 0, world, 1);
+        Room room2 = new Room(10, 10, 0, 0, world, 2);
         room1.xPos = 10;
         room1.yPos = 10;
         room2.xPos = 15;
@@ -49,15 +49,15 @@ public class TestRoom {
 
     @Test
     public void checkAllOverlapTest(){
-        Room room1 = new Room(10, 10, 0, 0, world);
-        Room room2 = new Room(10, 10, 0, 0, world);
+        Room room1 = new Room(10, 10, 0, 0, world, 1);
+        Room room2 = new Room(10, 10, 0, 0, world, 2);
         room1.xPos = 10;
         room1.yPos = 10;
         room2.xPos = 15;
         room2.yPos = 21;
         Room[] arr = new Room[]{room1, room2};
 
-        Room room3 = new Room(10, 10, 0, 0, world);
+        Room room3 = new Room(10, 10, 0, 0, world, 1);
         room3.xPos = 26;
         room3.yPos = 32;
         boolean tf = room1.checkAllOverlap(arr);
@@ -68,14 +68,26 @@ public class TestRoom {
 
     @Test
     public void plotAllRoomsTest(){
-        Room room1 = new Room(10, 10, 0, 0, world);
-        Room room2 = new Room(10, 10, 0, 0, world);
+        Room room1 = new Room(10, 10, 0, 0, world, 1);
+        Room room2 = new Room(10, 10, 0, 0, world, 2);
         room1.xPos = 10;
         room1.yPos = 10;
         room2.xPos = 15;
         room2.yPos = 21;
         Room[] arr = new Room[]{room1, room2};
         plotAllRooms(arr, world);
+    }
+
+    @Test
+    public void checkOutOfBoundTest(){
+        Room room1 = new Room(10, 10, 0, 0, world, 1);
+        Room room2 = new Room(13, 7, 0, 0, world, 2);
+        room1.xPos = 10;
+        room1.yPos = 10;
+        room2.xPos = 23;
+        room2.yPos = 51;
+        System.out.println(Room.checkOutOfBound(room2, world));
+        //System.out.println(Room.checkOutOfBound(room1, world));
     }
     @Test
     public void generateRandomRoomTest(){}
@@ -97,8 +109,8 @@ public class TestRoom {
 
         //=======================PlotAllRoomTest==========
 
-        Room room1 = new Room(10, 10, 0, 0, world);
-        Room room2 = new Room(10, 10, 0, 0, world);
+        Room room1 = new Room(10, 10, 0, 0, world, 1);
+        Room room2 = new Room(10, 10, 0, 0, world, 2);
         room1.xPos = 10;
         room1.yPos = 10;
         room2.xPos = 15;
@@ -108,6 +120,7 @@ public class TestRoom {
             i.drawRoom(world1);
         }*/
         Room[] arrRand = generateRandomRoom(16, world1);
+
         Room.plotAllRooms(arrRand, world1);
 
 
