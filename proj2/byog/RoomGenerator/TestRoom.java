@@ -44,6 +44,27 @@ public class TestRoom {
         System.out.println(room1.checkOverlap(room2));
     }
 
+    @Test
+    public void checkAllOverlapTest(){
+        Room room1 = new Room(10, 10, 0, 0, world);
+        Room room2 = new Room(10, 10, 0, 0, world);
+        room1.xPos = 10;
+        room1.yPos = 10;
+        room2.xPos = 15;
+        room2.yPos = 21;
+        Room[] arr = new Room[]{room1, room2};
+
+        Room room3 = new Room(10, 10, 0, 0, world);
+        room3.xPos = 26;
+        room3.yPos = 32;
+        boolean tf = room1.checkAllOverlap(arr);
+        System.out.println(room3.checkOverlap(room1));
+        System.out.println(room3.checkOverlap(room2));
+        System.out.println(tf);
+
+
+    }
+
 
     public static void main(String[] args) {
 

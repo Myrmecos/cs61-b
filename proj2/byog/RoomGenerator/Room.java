@@ -66,13 +66,13 @@ public class Room {
     public boolean checkAllOverlap(Room[] roomList){
         for (Room i : roomList){
             if (i == null){
-                return true;
-            }
-            if (checkOverlap(i)){
                 return false;
             }
+            if (checkOverlap(i)){
+                return true;
+            }
         }
-        return true;
+        return false;
      }
 
      public boolean checkOverlap(Room i){
@@ -80,7 +80,7 @@ public class Room {
         boolean yOverlap = true;
         int xRelPos21 = xPos + width - i.xPos;
         int xRelPos12 = xPos - i.xPos - i.width;
-        System.out.println("intercepted here" + xRelPos12 + xRelPos21);
+
         if (xRelPos12 > 0 || xRelPos21 < 0){
 
             return false;
