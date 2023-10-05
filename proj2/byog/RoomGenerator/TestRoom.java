@@ -8,6 +8,9 @@ import org.junit.Test;
 import java.lang.Math;
 import java.util.Random;
 
+import static byog.RoomGenerator.Room.generateRandomRoom;
+import static byog.RoomGenerator.Room.plotAllRooms;
+
 
 public class TestRoom {
     private static final int WIDTH = 60;
@@ -61,9 +64,21 @@ public class TestRoom {
         System.out.println(room3.checkOverlap(room1));
         System.out.println(room3.checkOverlap(room2));
         System.out.println(tf);
-
-
     }
+
+    @Test
+    public void plotAllRoomsTest(){
+        Room room1 = new Room(10, 10, 0, 0, world);
+        Room room2 = new Room(10, 10, 0, 0, world);
+        room1.xPos = 10;
+        room1.yPos = 10;
+        room2.xPos = 15;
+        room2.yPos = 21;
+        Room[] arr = new Room[]{room1, room2};
+        plotAllRooms(arr, world);
+    }
+    @Test
+    public void generateRandomRoomTest(){}
 
 
     public static void main(String[] args) {
@@ -73,10 +88,44 @@ public class TestRoom {
         TETile[][] world = new TETile[WIDTH][HEIGHT];
         TETile[][] world1 = setZero(world);
 
+        //===============================================
+        /*
         Room firstRoom = new Room(5, 8, 2, 2, world);
         firstRoom.drawRoom(world);
         firstRoom.printRoom();
-        ter.renderFrame(world1);
+        ter.renderFrame(world1);*/
+
+        //=======================PlotAllRoomTest==========
+
+        Room room1 = new Room(10, 10, 0, 0, world);
+        Room room2 = new Room(10, 10, 0, 0, world);
+        room1.xPos = 10;
+        room1.yPos = 10;
+        room2.xPos = 15;
+        room2.yPos = 21;
+        Room[] arr = new Room[]{room1, room2};
+        /*for (Room i : arr){
+            i.drawRoom(world1);
+        }*/
+        Room[] arrRand = generateRandomRoom(16, world1);
+        Room.plotAllRooms(arrRand, world1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ter.renderFrame(world1); //NEVER COMMENT OUT THIS LINE
     }
 
 }

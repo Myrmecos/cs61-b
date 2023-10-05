@@ -16,6 +16,8 @@ public class Room {
     public Random rdn;
     public int seed = 1002;
 
+
+
     //generate a random room, var is the variation in size
     //width is the span of the room, wall included
     public Room(int width, int height, int wvar, int hvar, TETile[][] world){
@@ -30,6 +32,7 @@ public class Room {
         this.height = height + (int) Math.round(randH * hvar);
         this.xPos = (int) Math.round(randX * worldWidth);
         this.yPos = (int) Math.round(randY * worldHeight);
+        this.seed = rdn.nextInt();
     }
 
     public void drawRoom(TETile[][] world){
@@ -66,10 +69,11 @@ public class Room {
     public boolean checkAllOverlap(Room[] roomList){
         for (Room i : roomList){
             if (i == null){
-                return false;
-            }
-            if (checkOverlap(i)){
-                return true;
+                int a = 0;
+            }else {
+                if (checkOverlap(i)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -94,6 +98,34 @@ public class Room {
 
          return true;
 
+     }
+
+     public static void plotAllRooms(Room[] roomList, TETile[][] world){
+        for (Room i : roomList){
+            if (i != null) {
+                i.drawRoom(world);
+            }
+        }
+     }
+
+     public static Room[] generateRandomRoom(int num, TETile[][] world){
+        Room[] roomList = new Room[num];
+        int cnt = 0;
+        for (int i = 0; i < num; i++){
+
+            Room newRoom = new Room(8, 10, 5, 5, world);
+            newRoom.printRoom();
+            if (newRoom.checkAllOverlap(roomList) == false){
+                roomList[i] = newRoom;
+            } else {
+                cnt += 1;
+                i--;
+            }
+            if (cnt >=10){
+                break;
+            }
+        }
+        return roomList;
      }
 
 
