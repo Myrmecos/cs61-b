@@ -55,7 +55,7 @@ public class GuitarString {
         Double num2 = buffer.peek();
         Double newNum = DECAY * (num1 + num2) / 2;
         buffer.enqueue(newNum);
-        buffer.printRb();
+        //buffer.printRb();
     }
 
     /* Return the double at the front of the buffer. */
