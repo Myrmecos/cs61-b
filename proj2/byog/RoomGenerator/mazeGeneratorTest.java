@@ -66,7 +66,7 @@ public class mazeGeneratorTest {
     }
 
     public static void main(String[] args){
-        TETile[][] world = new TETile[31][31];
+        TETile[][] world = new TETile[81][31];
         mazeGenerator mz = new mazeGenerator();
         int[][] background = mz.initBackground(world);
         mz.makeMaze();

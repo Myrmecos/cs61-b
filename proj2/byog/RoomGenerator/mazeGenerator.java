@@ -156,8 +156,9 @@ public class mazeGenerator {
     }
 
     public void mapToWorld(){
+
         for (int i = 0; i < width; i ++){
-            for (int j = 0; j < width; j ++){
+            for (int j = 0; j < height; j ++){
                 if (maze[i][j] == 1) {
                     world[i][j] = Tileset.WALL;
                 } else {
