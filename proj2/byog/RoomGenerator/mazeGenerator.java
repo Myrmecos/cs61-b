@@ -14,7 +14,12 @@ public class mazeGenerator {
     int height;
     int[][] maze;
     ArrayRingBuffer<Integer[]> queue;
-    Random rdn = new Random(1000);
+    int seed = 1000;
+    Random rdn;
+
+    public mazeGenerator(int seed){
+        rdn = new Random(seed);
+    }
     /*takes a world and initialize background in number (grid)
     * then returns background*/
     public int[][] initBackground(TETile[][] world){
@@ -78,6 +83,8 @@ public class mazeGenerator {
             Integer[][] possibleDirections = checkSurrounding(currentPos);
             Integer[][] possibleDirectionsRand = randomize(possibleDirections);
 
+            shuffleQueue();
+            shuffleQueue();
             shuffleQueue();
 
             for (Integer[] i : possibleDirectionsRand) { //remember to add rand
@@ -148,7 +155,7 @@ public class mazeGenerator {
         for (int i = 0; i < len; i ++){
             list.add(i);
         }
-        Collections.shuffle(list);
+        Collections.shuffle(list, new Random(rdn.nextInt()));
         for (int i = 0; i < len; i++){
             ret[i] = pd[list.get(i)];
         }

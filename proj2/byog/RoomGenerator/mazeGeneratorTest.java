@@ -1,15 +1,17 @@
 package byog.RoomGenerator;
 import byog.TileEngine.TERenderer;
 import byog.TileEngine.TETile;
-import edu.princeton.cs.algs4.In;
 import org.junit.Test;
+import byog.RoomGenerator.RoomGenerator;
+
+import java.util.Random;
 
 import static byog.RoomGenerator.mazeGenerator.printMatrix;
 
 public class mazeGeneratorTest {
 
     TETile[][] world = new TETile[31][31];
-    mazeGenerator mz = new mazeGenerator();
+    mazeGenerator mz = new mazeGenerator(5);
     int[][] background = mz.initBackground(world);
 
     @Test
@@ -24,7 +26,7 @@ public class mazeGeneratorTest {
 
     @Test
     public void testInitBackground(){
-        mazeGenerator mz = new mazeGenerator();
+        mazeGenerator mz = new mazeGenerator(5);
         int[][] background = mz.initBackground(world);
         printMatrix(background);
     }
@@ -67,10 +69,24 @@ public class mazeGeneratorTest {
 
     public static void main(String[] args){
         TETile[][] world = new TETile[81][31];
-        mazeGenerator mz = new mazeGenerator();
+        mazeGenerator mz = new mazeGenerator(5);
+        mz.rdn = new Random(5);
         int[][] background = mz.initBackground(world);
         mz.makeMaze();
         mz.mapToWorld();
+        RoomGenerator rg = new RoomGenerator(world, 5);
+        RoomGenerator.Room rm = rg.randomRoom(16, 14, 0, 0);
+        rg.drawRoom(rm);
+        RoomGenerator.Room r1 = new RoomGenerator.Room(1, 1, 10, 10);
+        RoomGenerator.Room r2 = new RoomGenerator.Room(1, 1, 10, 10);
+        System.out.println(RoomGenerator.checkOverlap(r1, r2));
+
+
+
+
+
+
+
         TERenderer ter = new TERenderer();
         ter.initialize(mz.width, mz.height);
         ter.renderFrame(mz.world);
