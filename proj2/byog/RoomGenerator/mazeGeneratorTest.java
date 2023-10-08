@@ -1,4 +1,5 @@
 package byog.RoomGenerator;
+import byog.TileEngine.TERenderer;
 import byog.TileEngine.TETile;
 import edu.princeton.cs.algs4.In;
 import org.junit.Test;
@@ -7,7 +8,7 @@ import static byog.RoomGenerator.mazeGenerator.printMatrix;
 
 public class mazeGeneratorTest {
 
-    TETile[][] world = new TETile[11][9];
+    TETile[][] world = new TETile[31][31];
     mazeGenerator mz = new mazeGenerator();
     int[][] background = mz.initBackground(world);
 
@@ -62,5 +63,16 @@ public class mazeGeneratorTest {
 
         printMatrix(background);
 
+    }
+
+    public static void main(String[] args){
+        TETile[][] world = new TETile[31][31];
+        mazeGenerator mz = new mazeGenerator();
+        int[][] background = mz.initBackground(world);
+        mz.makeMaze();
+        mz.mapToWorld();
+        TERenderer ter = new TERenderer();
+        ter.initialize(mz.width, mz.height);
+        ter.renderFrame(mz.world);
     }
 }

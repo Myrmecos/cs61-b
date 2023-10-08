@@ -1,10 +1,12 @@
 package byog.RoomGenerator;
 
 import byog.TileEngine.TETile;
+import byog.TileEngine.Tileset;
 import edu.princeton.cs.algs4.In;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class mazeGenerator {
     TETile[][] world;
@@ -12,6 +14,7 @@ public class mazeGenerator {
     int height;
     int[][] maze;
     ArrayRingBuffer<Integer[]> queue;
+    Random rdn = new Random(1000);
     /*takes a world and initialize background in number (grid)
     * then returns background*/
     public int[][] initBackground(TETile[][] world){
@@ -74,12 +77,23 @@ public class mazeGenerator {
             markCurrentPos(currentPos);
             Integer[][] possibleDirections = checkSurrounding(currentPos);
             Integer[][] possibleDirectionsRand = randomize(possibleDirections);
+
+            shuffleQueue();
+
             for (Integer[] i : possibleDirectionsRand) { //remember to add rand
                 queue.enqueue(i);
                 maze[i[0]][i[1]] = 7;
                 breakWall(currentPos, i);
 
             }
+        }
+    }
+
+    public void shuffleQueue(){
+        int r = rdn.nextInt(2);
+        if (r == 1 & !queue.isEmpty()) {
+            Integer[] ing = queue.dequeue();
+            queue.enqueue(ing);
         }
     }
 
@@ -139,6 +153,18 @@ public class mazeGenerator {
             ret[i] = pd[list.get(i)];
         }
         return ret;
+    }
+
+    public void mapToWorld(){
+        for (int i = 0; i < width; i ++){
+            for (int j = 0; j < width; j ++){
+                if (maze[i][j] == 1) {
+                    world[i][j] = Tileset.WALL;
+                } else {
+                    world[i][j] = Tileset.FLOOR;
+                }
+            }
+        }
     }
 
 }
