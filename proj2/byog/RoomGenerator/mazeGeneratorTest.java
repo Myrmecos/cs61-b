@@ -76,11 +76,15 @@ public class mazeGeneratorTest {
         mz.mapToWorld();
         RoomGenerator rg = new RoomGenerator(world, 5);
         RoomGenerator.Room rm = rg.randomRoom(16, 14, 0, 0);
-        rg.drawRoom(rm);
+        //rg.drawRoom(rm);
         RoomGenerator.Room r1 = new RoomGenerator.Room(1, 1, 10, 10);
-        RoomGenerator.Room r2 = new RoomGenerator.Room(1, 1, 10, 10);
+        RoomGenerator.Room r2 = new RoomGenerator.Room(1, 12, 10, 10);
         System.out.println(RoomGenerator.checkOverlap(r1, r2));
+        RoomGenerator.Room[] rmList = new RoomGenerator.Room[] {rm, r1, r2};
+        System.out.println(RoomGenerator.checkOverlapList(rm, rmList));
+        RoomGenerator.Room[] rmList1 = rg.makeRoomList(15);
 
+        rg.DrawRoomList(rmList1);
 
 
 
@@ -90,5 +94,6 @@ public class mazeGeneratorTest {
         TERenderer ter = new TERenderer();
         ter.initialize(mz.width, mz.height);
         ter.renderFrame(mz.world);
+        System.out.println("Hello world!");
     }
 }
