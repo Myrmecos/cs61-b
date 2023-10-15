@@ -82,9 +82,9 @@ public class mazeGeneratorTest {
         System.out.println(RoomGenerator.checkOverlap(r1, r2));
         RoomGenerator.Room[] rmList = new RoomGenerator.Room[] {rm, r1, r2};
         System.out.println(RoomGenerator.checkOverlapList(rm, rmList));
-        RoomGenerator.Room[] rmList1 = rg.makeRoomList(15);
-
+        RoomGenerator.Room[] rmList1 = rg.makeRoomList(40);
         rg.DrawRoomList(rmList1);
+        rg.generateDoor(rmList1, mz.world);
 
 
 

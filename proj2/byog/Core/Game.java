@@ -2,6 +2,7 @@ package byog.Core;
 
 import byog.TileEngine.TERenderer;
 import byog.TileEngine.TETile;
+import byog.RoomGenerator.Interface;
 
 public class Game {
     TERenderer ter = new TERenderer();
@@ -13,6 +14,10 @@ public class Game {
      * Method used for playing a fresh game. The game should start from the main menu.
      */
     public void playWithKeyboard() {
+        Interface itf = new Interface();
+        itf.makeInterface();
+        //itf.runGame();
+        System.out.println("end");
     }
 
     /**

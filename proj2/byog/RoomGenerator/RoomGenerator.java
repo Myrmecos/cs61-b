@@ -7,6 +7,7 @@ import java.util.Random;
 
 import static java.lang.Math.max;
 
+
 public class RoomGenerator {
     TETile[][] world;
     Random rdn;
@@ -86,7 +87,7 @@ public class RoomGenerator {
         Room[] roomList = new Room[roomNumber];
         int cnt = 0;
         for (int i = 0; i < roomNumber + 10; i ++){
-            Room newRoom = randomRoom(6, 6, 6, 6);
+            Room newRoom = randomRoom(5, 5, 6, 6);
 
             if (checkOverlapList(newRoom, roomList)){
                 //newRoom.printRoom();
@@ -107,6 +108,30 @@ public class RoomGenerator {
                 drawRoom(i);
             }
         }
+    }
+
+    public void generateDoor(Room[] roomList, TETile[][] world){
+        int i = 0;
+        Room rm;
+        int x;
+        int y;
+        while (true){
+            rm = roomList[i];
+            if (rm == null){
+                continue;
+            }
+            x = rm.xPos + 2;
+            y = rm.yPos - 1;
+            if (isValidWall(x, y, world)) {
+                world[x][y] = Tileset.LOCKED_DOOR;
+                return;
+            }
+            i += 1;
+        }
+    }
+
+    public boolean isValidWall(int x, int y, TETile[][] world){
+        return world[x - 1][y] == Tileset.WALL & world[x][y] == Tileset.WALL & world[x + 1][y] == Tileset.WALL & (y > 0) & (y < HEIGHT - 1) & (x < WIDTH);
     }
 
 
